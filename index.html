@@ -55,6 +55,14 @@
   <ol class="steps">
     <li><b>1</b>pilih layout</li><li><b>2</b>pilih frame</li><li><b>3</b>jepret &amp; hias</li><li><b>4</b>unduh / bagikan</li>
   </ol>
+  <div class="coffee">
+    <div class="coffee-text">
+      <span class="hand">psst, boleh banget tapi nggak wajib</span>
+      <b>Traktir kopi buat Hannan ☕</b>
+      <small>Snaphan gratis dan akan tetap gratis. Kalau kamu terbantu, kopimu bikin web ini terus diupdate.</small>
+    </div>
+    <button class="ink" id="btn-coffee">Scan QRIS</button>
+  </div>
 </section>
 
 <!-- LAYOUT & FRAME -->
@@ -193,6 +201,20 @@
 </section>
 
 <div id="modal" hidden><div class="modal-card"><button class="x" id="btn-close">✕</button><h3>Galeri sesi ini</h3><div id="g-grid"></div></div></div>
+
+<div id="donate" hidden>
+  <div class="modal-card donate-card">
+    <button class="x" id="close-donate">✕</button>
+    <span class="hand">makasih banyak ya!</span>
+    <h3>Traktir kopi ☕</h3>
+    <div class="qr-box">
+      <img id="qris-img" src="barcode.jpeg" alt="QRIS donasi Snaphan">
+      <p id="qris-miss" hidden>Gambar QRIS belum dipasang.</p>
+    </div>
+    <p class="hint">Buka e-wallet atau m-banking, pilih Scan/QRIS, lalu arahkan ke kode ini. Nominalnya bebas.</p>
+  </div>
+</div>
+
 <input type="file" id="f-stk" accept="image/*" hidden>
 <input type="file" id="f-frame" accept="image/*" hidden>
 <input type="file" id="f-photo" accept="image/*" multiple hidden>
