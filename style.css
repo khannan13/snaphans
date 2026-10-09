@@ -125,6 +125,17 @@ label input[type=range]{flex:1;accent-color:var(--a)}.chk{justify-content:flex-s
 .x{position:absolute;right:12px;top:12px;border:none;background:none;font-size:1.1rem}
 #g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}#g-grid img{width:100%;border:1px solid var(--line)}
 
+/* donasi */
+.coffee{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 28px;padding:16px 18px;background:var(--c);color:#17150f;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--sh);transform:rotate(-.6deg);border-radius:4px}
+.coffee-text{display:flex;flex-direction:column;gap:2px;max-width:560px}
+.coffee-text b{font-size:1.2rem;letter-spacing:-.4px}
+.coffee-text small{color:#0009;line-height:1.4}
+#donate{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:60;padding:20px}
+.donate-card{text-align:center;width:min(380px,100%)}
+.donate-card h3{font-size:1.5rem;letter-spacing:-.5px;margin-bottom:6px}
+.qr-box{background:#fff;color:#17150f;padding:12px;border:2px solid var(--ink);margin:12px auto;width:min(280px,100%);border-radius:6px}
+.qr-box img{width:100%;display:block}
+
 @media(max-width:1180px){main{grid-template-columns:minmax(0,1fr) 300px}.design-col{grid-column:1/-1}}
 @media(max-width:960px){.hero{grid-template-columns:1fr}.machine{max-width:340px}main{grid-template-columns:minmax(0,1fr)}.strip-col{position:static;max-height:none}}
 @media(max-width:640px){.screen{padding:10px}.tickets{grid-template-columns:1fr}.lay-cards{grid-template-columns:repeat(3,1fr)}
