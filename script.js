@@ -553,6 +553,12 @@ function doJoin(code) {
 $('btn-room').onclick = () => makeRoom();
 $('btn-join').onclick = () => { const c = $('join-code').value.trim(); if (!/^\d{4}$/.test(c)) return alert('Masukkan kode 4 angka dari temanmu.'); doJoin(c); };
 
+/* ================= DONASI ================= */
+$('btn-coffee').onclick = () => $('donate').hidden = false;
+$('close-donate').onclick = () => $('donate').hidden = true;
+$('donate').onclick = e => { if (e.target.id === 'donate') $('donate').hidden = true; };
+$('qris-img').onerror = () => { $('qris-img').hidden = true; $('qris-miss').hidden = false; };
+
 /* ================= INIT ================= */
 buildFrames(); buildStickers(); resetSlots(); theme(); drawFxLive();
 Promise.all(TF.map(f => document.fonts.load(f(20)))).then(() => { render(); buildStickers(); });
