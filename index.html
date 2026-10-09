@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snaphan — photobooth online</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600&family=Permanent+Marker&family=Space+Mono:wght@700&family=Pacifico&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body data-theme="scrap">
+<div id="flash"></div>
+
+<!-- BERANDA -->
+<section id="home" class="screen on">
+  <nav><div class="logo">snap<em>han</em></div><div class="themes"></div></nav>
+  <div class="hero">
+    <div class="hero-text">
+      <p class="kicker">photobooth online · gratis · tanpa akun</p>
+      <h1>Masuk, jepret, <span class="scribble">bawa pulang</span> stripnya.</h1>
+      <p class="sub">Pilih layout, dandani frame-nya, jepret bareng teman atau bareng dia yang lagi jauh. Stiker, coretan, efek film, semuanya ada.</p>
+      <div class="tickets">
+        <button class="ticket t1" id="btn-solo"><span class="hand">sendiri / bareng-bareng</span><b>Mulai foto</b><small>satu kamera, langsung gas</small></button>
+        <button class="ticket t2" id="btn-ldr"><span class="hand">buat yang LDR</span><b>Buat room</b><small>dua kamera, satu strip</small></button>
+        <div class="ticket t3 join"><span class="hand">sudah dikasih kode?</span>
+          <div class="row"><input type="text" id="join-home" placeholder="4 angka" maxlength="4" inputmode="numeric"><button class="ink" id="btn-join-home">Masuk</button></div>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="machine">
+      <div class="sign"><div class="bulbs"></div><b>SNAPHAN</b><small>PHOTO BOOTH · 2026</small><div class="bulbs"></div></div>
+      <div class="curtain"><div class="out" id="collage"></div></div>
+      <div class="slot-bar"></div>
+      <div class="coin"><span class="hand">tarik stripnya ↓</span></div>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><b>1</b>pilih layout</li><li><b>2</b>pilih frame</li><li><b>3</b>jepret &amp; hias</li><li><b>4</b>unduh / bagikan</li>
+  </ol>
+</section>
+
+<!-- LAYOUT & FRAME -->
+<section id="setup" class="screen">
+  <header class="bar"><button class="ghost" id="back-home">← Beranda</button><div class="logo sm">snap<em>han</em></div></header>
+  <div class="wrap">
+    <h2><span class="num">1</span> Mau berapa foto?</h2>
+    <div class="lay-cards" id="lay-cards"></div>
+    <h2><span class="num">2</span> Pilih frame</h2>
+    <div class="pills scroll" id="fr-cats"></div>
+    <div class="fr-grid" id="frames"></div>
+    <div class="row wrapr">
+      <button class="ghost" id="btn-upframe">+ Unggah gambar latar</button>
+      <label class="colorpick">Warna bebas <input type="color" id="c-pick" value="#ffb3c7"></label>
+      <button class="ghost" id="btn-rand">🎲 Acak desain</button>
+    </div>
+    <button class="big" id="go">Masuk booth →</button>
+  </div>
+</section>
+
+<!-- BOOTH -->
+<section id="booth" class="screen">
+  <header class="bar">
+    <button class="ghost" id="back-setup">← Layout &amp; frame</button>
+    <div class="room" id="room-box" hidden>
+      <button class="ghost" id="btn-room">Buat Room</button>
+      <span id="room-code" hidden>Kode: <b id="my-code">----</b></span>
+      <span id="room-msg"></span>
+      <input type="text" id="join-code" placeholder="4 angka" maxlength="4" inputmode="numeric">
+      <button class="ink" id="btn-join">Gabung</button>
+    </div>
+    <div class="row"><div class="themes"></div><button class="ghost" id="btn-gallery">Galeri <span id="g-count">0</span></button></div>
+  </header>
+  <main>
+    <section class="cam-col">
+      <div class="booth-sign"><div class="bulbs"></div><b>SNAPHAN</b><div class="bulbs"></div></div>
+      <div class="stage">
+        <div class="cams">
+          <div class="cam"><video id="local" autoplay playsinline muted></video><i>kamu</i></div>
+          <div class="cam" id="remote-box" hidden><video id="remote" autoplay playsinline></video><i>pasangan</i></div>
+        </div>
+        <canvas id="fxlive"></canvas>
+        <div id="countdown"></div>
+        <div id="coach" hidden></div>
+        <div id="review" hidden>
+          <div class="review-card">
+            <p>Pose <b id="rv-num">1</b>, sudah oke?</p><img id="rv-img" alt="">
+            <div class="row"><button class="ghost" id="btn-retake">Ulang</button><button class="ink" id="btn-accept">Pakai</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="thumbs-bar">
+        <div class="row"><b>Hasil jepretan</b><button class="ghost mini-btn" id="btn-upphoto">+ Unggah foto</button></div>
+        <div id="thumbs"></div>
+        <small class="hint">Tidak cocok? Ketuk fotonya untuk diganti.</small>
+      </div>
+      <div class="tools">
+        <div class="tabs" data-group="cam">
+          <button class="on" data-t="filter">Filter</button><button data-t="fx">Efek</button><button data-t="tone">Tone</button><button data-t="smart">✦ Smart</button><button data-t="opt">Opsi</button>
+        </div>
+        <div class="pane on" id="p-filter"><div class="pills" id="filters"></div></div>
+        <div class="pane" id="p-fx"><div class="pills" id="fxs"></div><p class="hint">Efek terlihat di kamera dan ikut tersimpan di foto.</p></div>
+        <div class="pane" id="p-tone">
+          <label>Terang <input type="range" id="s-b" min="60" max="150" value="100"></label>
+          <label>Kontras <input type="range" id="s-c" min="60" max="150" value="100"></label>
+          <label>Warna <input type="range" id="s-s" min="0" max="200" value="100"></label>
+        </div>
+        <div class="pane" id="p-smart">
+          <button class="smart" id="btn-enhance"><b>Auto Enhance</b><small>Baca cahaya, atur terang &amp; kontras</small></button>
+          <button class="smart" id="btn-coach"><b>Pose Coach</b><small>Ide pose acak tiap hitung mundur</small></button>
+          <button class="smart" id="btn-auto"><b>Mode Otomatis</b><small>Semua pose jalan sendiri tanpa review</small></button>
+          <button class="smart" id="btn-aiframe"><b>Frame Pilihan AI</b><small>Frame yang cocok dengan warna fotomu</small></button>
+          <p id="smart-msg"></p>
+        </div>
+        <div class="pane" id="p-opt">
+          <div class="row">Timer<div class="pills small" id="timers"><button data-v="3">3s</button><button data-v="5" class="on">5s</button><button data-v="10">10s</button></div></div>
+          <label class="chk"><input type="checkbox" id="c-mirror" checked> Mirror</label>
+          <label class="chk"><input type="checkbox" id="c-sound" checked> Suara</label>
+          <label class="chk"><input type="checkbox" id="c-ask"> Tanya dulu sebelum foto masuk strip</label>
+          <button class="ghost" id="btn-flip">Ganti kamera depan / belakang</button>
+        </div>
+      </div>
+      <button id="btn-shoot">Jepret</button>
+      <p class="hint">Spasi = jepret. Ketuk foto di strip atau thumbnail untuk mengganti.</p>
+    </section>
+
+    <aside class="strip-col">
+      <h2>Hasil strip</h2>
+      <div class="strip-wrap"><canvas id="strip"></canvas></div>
+      <button id="btn-dl" disabled>Unduh strip</button>
+    </aside>
+
+    <aside class="design-col">
+      <h2>Hias strip</h2>
+      <div class="tabs" data-group="des">
+        <button class="on" data-t="text">Teks</button><button data-t="stick">Stiker</button><button data-t="style">Gaya</button><button data-t="pen">Gambar</button><button data-t="extra">Ekstra</button>
+      </div>
+      <div class="dpane on" id="d-text">
+        <input type="text" id="t-title" value="Hari yang seru" maxlength="24">
+        <input type="text" id="t-foot" value="snaphan" maxlength="20">
+        <div class="pills" id="vibes"></div>
+        <p class="hint">✦ Caption AI: pilih mood, judul dibuat otomatis</p>
+        <div class="pills" id="fonts"><button data-v="0" class="on">Serif</button><button data-v="1">Spidol</button><button data-v="2">Mono</button><button data-v="3">Script</button></div>
+        <label class="chk"><input type="checkbox" id="c-date" checked> Tampilkan tanggal</label>
+      </div>
+      <div class="dpane" id="d-stick">
+        <div class="pills scroll" id="st-cats"></div>
+        <div class="st-grid" id="stickers"></div>
+        <label>Ukuran <input type="range" id="s-size" min="40" max="260" value="100"></label>
+        <label>Putar <input type="range" id="s-rot" min="-180" max="180" value="0"></label>
+        <div class="row"><button class="ghost" id="btn-dup">Gandakan</button><button class="ghost" id="btn-delsel">Hapus terpilih</button><button class="ghost" id="btn-clear">Hapus semua</button></div>
+        <button class="smart" id="btn-deco"><b>✦ Hias Otomatis</b><small>Tempel stiker yang cocok dengan tema frame</small></button>
+        <p class="hint">Ketuk stiker di strip untuk memilih, geser untuk memindah.</p>
+      </div>
+      <div class="dpane" id="d-style">
+        <b>Gaya foto</b>
+        <div class="pills" id="shapes"><button data-v="box" class="on">Kotak</button><button data-v="round">Membulat</button><button data-v="pola">Polaroid</button><button data-v="tilt">Miring</button></div>
+        <label class="chk"><input type="checkbox" id="c-stamp"> Stempel tanggal ala kamera digital</label>
+        <label class="chk"><input type="checkbox" id="c-grain"> Efek grain film</label>
+      </div>
+      <div class="dpane" id="d-pen">
+        <button class="ghost toggle" id="btn-pen">✎ Mode gambar: mati</button>
+        <div class="pills" id="pen-cols"></div>
+        <label>Tebal <input type="range" id="s-pen" min="2" max="24" value="6"></label>
+        <div class="row"><button class="ghost" id="btn-undo">Undo coretan</button><button class="ghost" id="btn-clearpen">Hapus coretan</button></div>
+        <p class="hint">Nyalakan mode gambar, lalu corat-coret langsung di strip.</p>
+      </div>
+      <div class="dpane" id="d-extra">
+        <button class="ghost" id="btn-rand2">🎲 Acak desain</button>
+        <button class="ghost" id="btn-restart">Ulangi sesi foto</button>
+        <button class="ghost" id="btn-share">Bagikan</button>
+        <button class="ghost" id="btn-print">Cetak</button>
+      </div>
+    </aside>
+  </main>
+</section>
+
+<div id="modal" hidden><div class="modal-card"><button class="x" id="btn-close">✕</button><h3>Galeri sesi ini</h3><div id="g-grid"></div></div></div>
+<input type="file" id="f-stk" accept="image/*" hidden>
+<input type="file" id="f-frame" accept="image/*" hidden>
+<input type="file" id="f-photo" accept="image/*" multiple hidden>
+<canvas id="cv" hidden></canvas>
+<script src="script.js"></script>
+</body>
+</html>
