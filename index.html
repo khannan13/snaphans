@@ -114,6 +114,12 @@
           </div>
         </div>
       </div>
+
+      <div class="bg-bar">
+        <b>Latar belakang <small id="bg-state"></small></b>
+        <div class="pills scroll" id="bgs"></div>
+      </div>
+
       <div class="thumbs-bar">
         <div class="row"><b>Hasil jepretan</b><button class="ghost mini-btn" id="btn-upphoto">+ Unggah foto</button></div>
         <div id="thumbs"></div>
@@ -126,9 +132,9 @@
         <div class="pane on" id="p-filter"><div class="pills" id="filters"></div></div>
         <div class="pane" id="p-fx"><div class="pills" id="fxs"></div><p class="hint">Efek terlihat di kamera dan ikut tersimpan di foto.</p></div>
         <div class="pane" id="p-booth">
-          <b>Latar bilik</b>
+          <b>Hiasan tepi bilik</b>
           <div class="pills" id="booths"></div>
-          <p class="hint">Tirai, lampu, dan panel ikut terekam di foto. Berlaku untuk jepretan berikutnya.</p>
+          <p class="hint">Tirai, lampu, dan panel di tepi kamera. Untuk tirai di belakang badanmu, pakai pilihan Latar belakang di bawah kamera.</p>
           <label class="chk"><input type="checkbox" id="c-live"> Live Photo (rekam ±2 detik tiap jepretan)</label>
           <p class="hint">Foto di strip jadi bergerak. Simpan sebagai video lewat tombol Unduh Live di bawah strip.</p>
         </div>
@@ -226,9 +232,11 @@
 <input type="file" id="f-stk" accept="image/*" hidden>
 <input type="file" id="f-frame" accept="image/*" hidden>
 <input type="file" id="f-photo" accept="image/*" multiple hidden>
+<input type="file" id="f-bg" accept="image/*" hidden>
 <canvas id="cv" hidden></canvas>
 <script src="script.js"></script>
 <script src="extra.js"></script>
 <script src="live.js"></script>
+<script src="bg.js"></script>
 </body>
 </html>
