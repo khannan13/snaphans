@@ -140,3 +140,8 @@ label input[type=range]{flex:1;accent-color:var(--a)}.chk{justify-content:flex-s
 @media(max-width:960px){.hero{grid-template-columns:1fr}.machine{max-width:340px}main{grid-template-columns:minmax(0,1fr)}.strip-col{position:static;max-height:none}}
 @media(max-width:640px){.screen{padding:10px}.tickets{grid-template-columns:1fr}.lay-cards{grid-template-columns:repeat(3,1fr)}
   .cam-col,.design-col,.strip-col{padding:12px}.st-grid{grid-template-columns:repeat(4,1fr)}#g-grid{grid-template-columns:repeat(2,1fr)}.out canvas{width:88px}}
+
+/* kategori stiker & grid yang lebih besar (extra.js) */
+#st-cats{flex-wrap:wrap!important;max-height:92px;overflow-y:auto}
+.st-grid{grid-template-columns:repeat(6,1fr);max-height:300px}
+@media(max-width:640px){.st-grid{grid-template-columns:repeat(5,1fr)}}
