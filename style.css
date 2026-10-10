@@ -146,3 +146,8 @@ label input[type=range]{flex:1;accent-color:var(--a)}.chk{justify-content:flex-s
 #st-cats{flex-wrap:wrap!important;max-height:92px;overflow-y:auto}
 .st-grid{grid-template-columns:repeat(6,1fr);max-height:300px}
 @media(max-width:640px){.st-grid{grid-template-columns:repeat(5,1fr)}}
+
+/* latar virtual di belakang orang (bg.js) */
+#vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.bg-bar{display:flex;flex-direction:column;gap:6px}
+.bg-bar b small{font-weight:400;color:var(--mute);margin-left:6px}
