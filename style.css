@@ -114,6 +114,7 @@ label input[type=range]{flex:1;accent-color:var(--a)}.chk{justify-content:flex-s
 #btn-shoot{background:radial-gradient(circle at 30% 25%,#ff8a72,var(--a) 62%);color:#fff;padding:15px;font-weight:800;font-size:1.05rem;box-shadow:4px 4px 0 var(--sh);position:sticky;bottom:10px;z-index:10;animation:ready 2.2s infinite}
 @keyframes ready{50%{box-shadow:4px 4px 0 var(--sh),0 0 0 7px #e8452c33}}
 #btn-dl{background:var(--ink);color:var(--paper);padding:12px;font-weight:800}#btn-dl:disabled{opacity:.35;cursor:not-allowed}
+#btn-dlive{padding:10px;font-weight:700}#btn-dlive:disabled{opacity:.5;cursor:wait}
 .st-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-height:250px;overflow:auto;padding:2px}
 .st-grid button{padding:2px;min-height:40px;border-width:1.5px;background:#fff}.st-grid canvas{width:100%;height:auto;display:block}
 .st-grid .up{font-size:.72rem;color:var(--mute);border-style:dashed;background:var(--paper)}
