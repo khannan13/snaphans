@@ -121,10 +121,17 @@
       </div>
       <div class="tools">
         <div class="tabs" data-group="cam">
-          <button class="on" data-t="filter">Filter</button><button data-t="fx">Efek</button><button data-t="tone">Tone</button><button data-t="smart">✦ Smart</button><button data-t="opt">Opsi</button>
+          <button class="on" data-t="filter">Filter</button><button data-t="fx">Efek</button><button data-t="booth">Bilik</button><button data-t="tone">Tone</button><button data-t="smart">✦ Smart</button><button data-t="opt">Opsi</button>
         </div>
         <div class="pane on" id="p-filter"><div class="pills" id="filters"></div></div>
         <div class="pane" id="p-fx"><div class="pills" id="fxs"></div><p class="hint">Efek terlihat di kamera dan ikut tersimpan di foto.</p></div>
+        <div class="pane" id="p-booth">
+          <b>Latar bilik</b>
+          <div class="pills" id="booths"></div>
+          <p class="hint">Tirai, lampu, dan panel ikut terekam di foto. Berlaku untuk jepretan berikutnya.</p>
+          <label class="chk"><input type="checkbox" id="c-live"> Live Photo (rekam ±2 detik tiap jepretan)</label>
+          <p class="hint">Foto di strip jadi bergerak. Simpan sebagai video lewat tombol Unduh Live di bawah strip.</p>
+        </div>
         <div class="pane" id="p-tone">
           <label>Terang <input type="range" id="s-b" min="60" max="150" value="100"></label>
           <label>Kontras <input type="range" id="s-c" min="60" max="150" value="100"></label>
@@ -153,6 +160,7 @@
       <h2>Hasil strip</h2>
       <div class="strip-wrap"><canvas id="strip"></canvas></div>
       <button id="btn-dl" disabled>Unduh strip</button>
+      <button class="ghost" id="btn-dlive">Unduh Live (video)</button>
     </aside>
 
     <aside class="design-col">
@@ -221,5 +229,6 @@
 <canvas id="cv" hidden></canvas>
 <script src="script.js"></script>
 <script src="extra.js"></script>
+<script src="live.js"></script>
 </body>
 </html>
